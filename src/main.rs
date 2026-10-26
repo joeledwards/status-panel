@@ -80,13 +80,11 @@ impl Runtime {
             };
         }
         if let Some(frame) = &self.file_cache { return Ok(frame.clone()); }
-        let modes: Vec<_> = self.config.content.modes.iter().copied()
-            .filter(|mode| *mode != ContentMode::File).collect();
+        let modes = &self.config.content.modes;
         let mode = modes[self.mode_index % modes.len()];
         content::render(
             mode,
             self.config.dimensions(),
-            self.config.content.file.as_deref(),
             &self.system_info,
         )
     }

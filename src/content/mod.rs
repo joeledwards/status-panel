@@ -18,14 +18,12 @@ impl SystemInfo {
 pub fn render(
     mode: ContentMode,
     dimensions: Dimensions,
-    file: Option<&Path>,
     system_info: &SystemInfo,
 ) -> anyhow::Result<Frame> {
     match mode {
         ContentMode::Dashboard => Ok(dashboard(dimensions, system_info)),
         ContentMode::Clock => Ok(clock(dimensions)),
         ContentMode::System => Ok(system(dimensions, system_info)),
-        ContentMode::File => file_content(dimensions, file.expect("validated file path")),
     }
 }
 

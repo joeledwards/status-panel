@@ -47,7 +47,7 @@ impl Default for ContentConfig {
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Deserialize)]
 #[serde(rename_all = "kebab-case")]
-pub enum ContentMode { Dashboard, Clock, System, File }
+pub enum ContentMode { Dashboard, Clock, System }
 
 #[derive(Clone, Debug, Default, Deserialize)]
 #[serde(default, deny_unknown_fields)]
@@ -113,12 +113,6 @@ impl Config {
     fn validate(&self) -> Result<()> {
         Dimensions::new(self.display.columns, self.display.rows)?;
         if self.content.modes.is_empty() { bail!("content.modes must contain at least one mode"); }
-        if !self.content.modes.iter().any(|mode| *mode != ContentMode::File) {
-            bail!("content.modes must contain dashboard, clock, or system as a fallback");
-        }
-        if self.content.modes.contains(&ContentMode::File) && self.content.file.is_none() {
-            bail!("content.file is required when the file mode is enabled");
-        }
         if self.content.poll_interval.is_zero() { bail!("content.poll_interval must be greater than zero"); }
         if self.content.modes.contains(&ContentMode::Dashboard)
             && (self.display.columns < 20 || self.display.rows < 4)

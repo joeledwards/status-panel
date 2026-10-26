@@ -21,26 +21,17 @@ project's supported Rust version is selected.
 Copy `status-panel.example.toml` to `status-panel.toml` and edit it. Display
 geometry is required; there is no implicit physical-display size.
 
+See the **[complete configuration reference](docs/configuration.md)** for every
+field, default, validation rule, content mode, command-line override, and live
+reload behavior. The checked-in
+[`status-panel.example.toml`](status-panel.example.toml) is a runnable 20x4
+development configuration.
+
 The configuration path is selected in this order:
 
 1. `--config PATH`
 2. `STATUS_PANEL_CONFIG`
 3. `./status-panel.toml`
-
-Relative content-file paths are resolved relative to the configuration file.
-When that file exists, its lines override generated content. Removing it
-returns to the selected generated mode. Extra rows and columns are
-truncated and short rows are padded.
-
-Available generated modes are `dashboard`, `clock`, and `system`. The
-`dashboard` mode reproduces the legacy 20x4 layout: local time, UTC time,
-hostname, and IP address with seconds as a heartbeat. It requires geometry of
-at least 20 columns by four rows. Enable it with:
-
-```toml
-[content]
-modes = ["dashboard", "clock", "system"]
-```
 
 Configuration and content are polled and applied without restarting. Invalid
 replacement configuration leaves the last-known-good configuration active and
