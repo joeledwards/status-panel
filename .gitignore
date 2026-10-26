@@ -1,0 +1,6 @@
+/target/
+/status-panel.toml
+/display.txt
+*.swp
+*.tmp
+.DS_Store

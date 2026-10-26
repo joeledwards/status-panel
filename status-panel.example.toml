@@ -1,0 +1,30 @@
+[display]
+# Geometry is deliberately required; it must match the physical display.
+columns = 20
+rows = 4
+update = "full"                 # "full" or "changed"
+forced_refresh = "60s"          # optional repair cadence
+
+[content]
+modes = ["dashboard", "clock", "system"] # cycled by the optional button
+file = "display.txt"             # existing file overrides the selected mode
+poll_interval = "500ms"
+
+[output.terminal]
+enabled = true
+
+[output.log]
+enabled = false
+only_when_changed = true
+
+[output.lcd]
+enabled = false
+bus = 1
+address = 0x27
+backlight = true
+reinitialize_on_forced_refresh = false
+
+[button]
+enabled = false
+bcm_pin = 17
+normally_closed = false

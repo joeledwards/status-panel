@@ -1,0 +1,20 @@
+[package]
+name = "status-panel"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "A configurable character-cell status display"
+repository = "https://github.com/joeledwards/status-panel"
+
+[dependencies]
+anyhow = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+clap = { version = "4", features = ["derive", "env"] }
+ctrlc = "3"
+hostname = "0.4"
+if-addrs = "0.13"
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+
+[target.'cfg(all(target_os = "linux", any(target_arch = "arm", target_arch = "aarch64")))'.dependencies]
+rppal = "0.22"
